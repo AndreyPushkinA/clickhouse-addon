@@ -1,20 +1,50 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-RUN apk add --no-cache \
+# Install requirements for ClickHouse
+RUN \
+  apk add --no-cache \
+    g++ \
+    make \
+    cmake \
     wget \
-    ca-certificates
+    curl \
+    unixodbc \
+    unixodbc-dev \
+    libtool \
+    libressl-dev \
+    libcurl \
+    libcurl-dev \
+    libcap \
+    libcap-dev \
+    libtool \
+    libtool-dev \
+    tzdata \
+    bash \
+    boost-dev \
+    rapidjson-dev \
+    snappy-dev \
+    zlib-dev \
+    lz4-dev \
+    brotli-dev \
+    icu-dev \
+    protobuf-dev \
+    git
 
-RUN wget -qO - https://repository.clickhouse.com/stable/stable.key | apt-key add - \
-    && echo "deb https://repository.clickhouse.com/stable/ main/" | tee /etc/apt/sources.list.d/clickhouse.list \
-    && apt-get update \
-    && apt-get install -y clickhouse-server clickhouse-client \
-    && service clickhouse-server start
+# Download ClickHouse source code
+WORKDIR /tmp
+RUN git clone --recursive https://github.com/ClickHouse/ClickHouse.git
 
-COPY rootfs /
+# Build and install ClickHouse
+WORKDIR /tmp/ClickHouse
+RUN mkdir build
+WORKDIR /tmp/ClickHouse/build
+RUN cmake -DCMAKE_BUILD_TYPE=Release ..
+RUN make -j$(nproc)
+RUN make install
 
+# Clean up
 WORKDIR /
+RUN rm -rf /tmp/ClickHouse
 
-EXPOSE 8123 9000
-
-CMD ["clickhouse-server"]
+CMD [ "clickhouse-server" ]
