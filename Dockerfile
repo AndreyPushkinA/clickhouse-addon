@@ -1,50 +1,13 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+ARG BUILD_FROM=ubuntu:focal-20221130
+FROM ${BUILD_FROM}
 
-# Install requirements for ClickHouse
-RUN \
-  apk add --no-cache \
-    g++ \
-    make \
-    cmake \
-    wget \
-    curl \
-    unixodbc \
-    unixodbc-dev \
-    libtool \
-    libressl-dev \
-    libcurl \
-    libcurl-dev \
-    libcap \
-    libcap-dev \
-    libtool \
-    libtool-dev \
-    tzdata \
-    bash \
-    boost-dev \
-    rapidjson-dev \
-    snappy-dev \
-    zlib-dev \
-    lz4-dev \
-    brotli-dev \
-    icu-dev \
-    protobuf-dev \
-    git
-
-# Download ClickHouse source code
-WORKDIR /tmp
-RUN git clone --recursive https://github.com/ClickHouse/ClickHouse.git
-
-# Build and install ClickHouse
-WORKDIR /tmp/ClickHouse
-RUN mkdir build
-WORKDIR /tmp/ClickHouse/build
-RUN cmake -DCMAKE_BUILD_TYPE=Release ..
-RUN make -j$(nproc)
-RUN make install
-
-# Clean up
-WORKDIR /
-RUN rm -rf /tmp/ClickHouse
-
-CMD [ "clickhouse-server" ]
+RUN apt-get update && apt-get install -y apt-transport-https ca-certificates dirmngr gpg gnupg expect && \
+    mkdir -p /root/.gnupg && chmod 600 /root/.gnupg && \
+    GNUPGHOME="/root/.gnupg" gpg --no-default-keyring --keyring /usr/share/keyrings/clickhouse-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8919F6BD2B48D754 && \
+    chmod +r /usr/share/keyrings/clickhouse-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg] https://packages.clickhouse.com/deb stable main" | tee /etc/apt/sources.list.d/clickhouse.list && \
+    apt-get update && apt-get clean && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y clickhouse-server clickhouse-client && \
+    echo "clickhouse-common clickhouse-common/use_pcre16 boolean false" | debconf-set-selections && \
+    echo "clickhouse-common clickhouse-common/use_pcre8 boolean true" | debconf-set-selections && \
+    service clickhouse-server start
