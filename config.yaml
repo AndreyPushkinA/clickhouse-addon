@@ -10,10 +10,5 @@ arch:
   - i386
 boot: auto
 ports:
-  8123/tcp:
-    description: "ClickHouse HTTP interface port."
-    default: 8123
-environment:
-  CLICKHOUSE_DB: "homeassistant"
-  CLICKHOUSE_USER: "homeassistant"
-  CLICKHOUSE_PASSWORD: "homeassistant"
+  8123/tcp
+image: yandex/clickhouse-server
