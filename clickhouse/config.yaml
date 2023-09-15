@@ -1,0 +1,39 @@
+---
+name: Clickhouse
+version: dev
+slug: clickhouse
+url: https://github.com/AndreyPushkinA/clickhouse-ha-addon
+ingress: true
+ingress_port: 1337
+ingress_stream: true
+startup: services
+init: false
+arch:
+  - amd64
+uart: true
+hassio_api: true
+hassio_role: manager
+homeassistant_api: true
+map:
+  - config:rw
+  - ssl:rw
+  - addons:rw
+  - media:rw
+  - share:rw
+  - backup:rw
+services:
+  - mysql:want
+  - mqtt:want
+options:
+  packages: []
+  init_commands: []
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  config_path: str?
+  packages:
+    - str
+  init_commands:
+    - str
+ports:
+  8124/tcp: 8124
+  9000/tcp: 9000
