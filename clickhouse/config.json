@@ -6,7 +6,7 @@
     "arch": ["amd64"],
     "startup": "services",
     "boot": "auto",
-    "image": "yandex/clickhouse-server",
+    "image": "yandex/clickhouse-server:latest",
     "options": {
         "listen_host": "::"
     },
