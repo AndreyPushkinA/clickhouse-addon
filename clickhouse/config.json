@@ -8,8 +8,8 @@
     "boot": "auto",
     "options": {},
     "ports": {
-        "8124/tcp": 8124,
-        "9000/tcp": 9000
+        "8124/tcp": null,
+        "9000/tcp": null
     },
     "schema": {}
- }
+}
