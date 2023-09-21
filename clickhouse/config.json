@@ -6,13 +6,12 @@
     "arch": ["amd64"],
     "startup": "services",
     "boot": "auto",
-    "image": "yandex/clickhouse-server:latest",
     "options": {
         "listen_host": "::"
     },
     "ports": {
         "8124/tcp": null,
-        "9000/tcp": 9000
+        "9000/tcp": null
     },
     "schema": {
         "listen_host": "str?"
