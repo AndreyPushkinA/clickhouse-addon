@@ -11,7 +11,9 @@
     },
     "ports": {
         "8124/tcp": null,
-        "9000/tcp": null
+        "9000/tcp": 9000
     },
-    "schema": {}
+    "schema": {
+        "listen_host": "str?"
+    }
 }
