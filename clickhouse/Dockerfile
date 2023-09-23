@@ -16,6 +16,8 @@ RUN chmod +r /usr/share/keyrings/clickhouse-keyring.gpg && \
     apt-get update && \
     apt-get install -y clickhouse-server clickhouse-client
 
-COPY clickhouse_config.xml /etc/clickhouse-server/config.d/
+RUN sed -i 's|<tcp_port>.*</tcp_port>|<tcp_port>8080</tcp_port>|' /etc/clickhouse-server/users.xml
+
+RUN echo "<listen_port>8080</listen_port>" > /etc/clickhouse-server/config.d/listen.xml
 
 CMD ["clickhouse-server"]
