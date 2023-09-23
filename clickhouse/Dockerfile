@@ -1,6 +1,4 @@
-FROM ubuntu:latest
-
-ENV DEBIAN_FRONTEND=noninteractive
+FROM ghcr.io/hassio-addons/debian-base/amd64:7.1.0
 
 RUN apt-get update && \
     apt-get install -y apt-transport-https ca-certificates dirmngr
@@ -18,4 +16,4 @@ RUN chmod +r /usr/share/keyrings/clickhouse-keyring.gpg && \
     apt-get update && \
     apt-get install -y clickhouse-server clickhouse-client
 
-CMD ["service", "clickhouse-server", "start"]
+CMD ["clickhouse-server"]
