@@ -17,6 +17,6 @@ RUN chmod +r /usr/share/keyrings/clickhouse-keyring.gpg && \
     apt-get install -y clickhouse-server clickhouse-client
 
 RUN mkdir -p /etc/services.d/clickhouse
-COPY clickhouse/clickhouse-run /etc/services.d/clickhouse/run
+COPY clickhouse-run /etc/services.d/clickhouse/run
 
 CMD ["/init"]
