@@ -17,4 +17,3 @@ RUN chmod +r /usr/share/keyrings/clickhouse-keyring.gpg && \
     apt-get install -y clickhouse-server clickhouse-client
 
 CMD ["clickhouse-server"]
-CMD ["clickhouse-client"]
