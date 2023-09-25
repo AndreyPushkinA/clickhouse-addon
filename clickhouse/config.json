@@ -7,8 +7,4 @@
     "startup": "services",
     "boot": "auto",
     "init": false,
-    "ports": {
-        "8124/tcp": null,
-        "9000/tcp": null
-    }
 }
