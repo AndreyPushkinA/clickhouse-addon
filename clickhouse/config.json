@@ -8,8 +8,8 @@
     "boot": "auto",
     "init": false,
     "ports": {
-        "8123/tcp": 8124,
-        "9000/tcp": 9001
+        "8124/tcp": 8124,
+        "9000/tcp": 9000
     },
     "port_description": {
         "8123/tcp": "ClickHouse HTTP interface",
