@@ -1,4 +1,44 @@
 <clickhouse>
+    <logger>
+        <level>trace</level>
+        <console>true</console>
+    </logger>
+
     <http_port>8124</http_port>
     <tcp_port>9001</tcp_port>
+    <mysql_port>9005</mysql_port>
+
+    <path>./</path>
+
+    <uncompressed_cache_size>8589934592</uncompressed_cache_size>
+    <mark_cache_size>5368709120</mark_cache_size>
+    <mlock_executable>true</mlock_executable>
+
+    <compression>
+        <case>
+            <method>lz4</method>
+        </case>
+    </compression>
+
+    <users>
+        <default>
+            <password/>
+
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+
+            <profile>default</profile>
+            <quota>default</quota>
+            <access_management>1</access_management>
+        </default>
+    </users>
+
+    <profiles>
+        <default/>
+    </profiles>
+
+    <quotas>
+        <default/>
+    </quotas>
 </clickhouse>
