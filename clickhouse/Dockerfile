@@ -16,6 +16,6 @@ RUN chmod +r /usr/share/keyrings/clickhouse-keyring.gpg && \
     apt-get update && \
     apt-get install -y clickhouse-server clickhouse-client
 
-COPY ports.xml /etc/clickhouse-server/config.d/
+COPY config.xml /etc/clickhouse-server/config.d/
 
 CMD ["clickhouse-server"]
