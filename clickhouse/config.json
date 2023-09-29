@@ -9,10 +9,10 @@
     "init": false,
     "ports": {
         "8124/tcp": 8124,
-        "9000/tcp": 9001
+        "9001/tcp": 9001
     },
     "port_description": {
-        "8123/tcp": "ClickHouse HTTP interface",
-        "9000/tcp": "ClickHouse native interface"
+        "8124/tcp": "ClickHouse HTTP interface",
+        "9001/tcp": "ClickHouse native interface"
     }
 }
