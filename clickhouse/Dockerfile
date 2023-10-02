@@ -1,4 +1,5 @@
-FROM yandex/clickhouse-server:latest
+ARG BUILD_FROM
+FROM $BUILD_FROM
 
 COPY ports.xml /etc/clickhouse-server/config.d/
 
