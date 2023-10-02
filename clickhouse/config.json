@@ -5,6 +5,7 @@
     "description": "Clickhouse Home Assistant add-on",
     "arch": ["amd64"],
     "startup": "services",
+    "image": "clickhouse/clickhouse-server",
     "init": false,
     "ports": {
         "8124": 8124,
