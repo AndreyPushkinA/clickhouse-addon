@@ -4,7 +4,7 @@
     "slug": "clickhouse_addon",
     "description": "Clickhouse Home Assistant add-on",
     "arch": ["amd64"],
-    "boot": auto,
+    "boot": "auto",
     "startup": "services",
     "init": false,
     "ports": {
